@@ -26,14 +26,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message = update.message.text    
     logger.info(f"Received message: {message}")
     response = run_agent(message)
+    print(f"Response: {response}")
     await context.bot.send_message(chat_id=update.effective_chat.id, text=response)
 
-async def american_accent(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    message = update.message.text
-    logger.info(f"Received /american_accent command with message: {message}")
-    # Placeholder for the actual implementation of generating American accent variations
-    response = f"Here are three ways to say '{message}' in an American accent:\n1. {message} (variation 1)\n2. {message} (variation 2)\n3. {message} (variation 3)"
-    await context.bot.send_message(chat_id=update.effective_chat.id, text=response)
+# async def american_accent(update: Update, context: ContextTypes.DEFAULT_TYPE):
+#     message = update.message.text
+#     logger.info(f"Received /american_accent command with message: {message}")
+#     # Placeholder for the actual implementation of generating American accent variations
+#     response = f"Here are three ways to say '{message}' in an American accent:\n1. {message} (variation 1)\n2. {message} (variation 2)\n3. {message} (variation 3)"
+#     await context.bot.send_message(chat_id=update.effective_chat.id, text=response)
 
     
 
@@ -44,8 +45,8 @@ def main():
     start_handler = CommandHandler('start', start)
     application.add_handler(start_handler)
     
-    american_accent_handler = CommandHandler('american_accent', american_accent)
-    application.add_handler(american_accent_handler)
+    # american_accent_handler = CommandHandler('american_accent', american_accent)
+    # application.add_handler(american_accent_handler)
 
     message_handler = MessageHandler(filters.TEXT & ~filters.COMMAND, handle_message)
     application.add_handler(message_handler)
